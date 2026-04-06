@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تصميم آبل - دليل المعايير</title>
+    <style>
+        :root {
+            /* الألوان الأساسية */
+            --apple-black: #000000;
+            --apple-light-gray: #f5f5f7;
+            --apple-near-black: #1d1d1f;
+            --apple-blue: #0071e3;
+            --apple-link-blue: #0066cc;
+            --apple-dark-surface: #272729;
+            
+            /* الشفافية */
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            
+            /* الخطوط (افتراضية في حال عدم توفر SF Pro) */
+            --font-display: "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-text: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-text);
+            line-height: 1.47;
+            color: var(--apple-near-black);
+            margin: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+            background-color: var(--nav-bg);
+            backdrop-filter: saturate(180%) blur(20px);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: 56px; line-height: 1.07; margin-bottom: 24px; }
+        h2 { font-size: 40px; line-height: 1.10; margin-top: 60px; border-bottom: 1px solid #d2d2d7; padding-bottom: 10px; }
+        h3 { font-size: 28px; line-height: 1.14; margin-top: 30px; }
+
+        .section-dark {
+            background-color: var(--apple-black);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background-color: var(--apple-light-gray);
+            padding: 80px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            text-align: right;
+            padding: 12px;
+            border-bottom: 1px solid #d2d2d7;
+        }
+
+        th { background-color: #f5f5f7; font-weight: 600; }
+
+        .btn-primary {
+            background-color: var(--apple-blue);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        .pill-link {
+            color: var(--apple-link-blue);
+            text-decoration: none;
+            border: 1px solid var(--apple-link-blue);
+            padding: 5px 15px;
+            border-radius: 980px;
+            font-size: 14px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+            margin-top: 20px;
+        }
+
+        ul { line-height: 1.8; }
+        code { background: #f0f0f0; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>Design System: Apple</div>
+</header>
+
+<main class="container">
+    <section>
+        <h1>Design System: Apple</h1>
+        
+        <h2>1. Visual Theme & Atmosphere</h2>
+        <p>يعتبر موقع آبل الإلكتروني نموذجاً في الدراما المدروسة — مساحات شاسعة من الأسود الصافي والأبيض القريب لتعمل كخلفيات سينمائية للمنتجات التي يتم تصويرها كأنها منحوتات في معرض فني.</p>
+        
+        <div class="card">
+            <strong>الخصائص الرئيسية:</strong>
+            <ul>
+                <li>خطوط SF Pro Display/Text مع التحجيم البصري التلقائي.</li>
+                <li>إيقاع ثنائي للأقسام: أسود (<code>#000000</code>) متبادل مع رمادي فاتح (<code>#f5f5f7</code>).</li>
+                <li>لون تمييز واحد: أزرق آبل (<code>#0071e3</code>) للعناصر التفاعلية فقط.</li>
+                <li>فراغات بيضاء سخية بين الأقسام.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Color Palette & Roles</h2>
+        <h3>Primary</h3>
+        <ul>
+            <li><strong>Pure Black (<code>#000000</code>):</strong> خلفيات أقسام البطولة، عرض المنتجات الغامر.</li>
+            <li><strong>Light Gray (<code>#f5f5f7</code>):</strong> خلفيات الأقسام البديلة، المناطق المعلوماتية.</li>
+            <li><strong>Near Black (<code>#1d1d1f</code>):</strong> النص الأساسي على الخلفيات الفاتحة.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Typography Rules</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Size</th>
+                    <th>Weight</th>
+                    <th>Line Height</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Display Hero</td>
+                    <td>56px</td>
+                    <td>600</td>
+                    <td>1.07</td>
+                    <td>عناوين إطلاق المنتجات</td>
+                </tr>
+                <tr>
+                    <td>Body</td>
+                    <td>17px</td>
+                    <td>400</td>
+                    <td>1.47</td>
+                    <td>نص القراءة القياسي</td>
+                </tr>
+                <tr>
+                    <td>Link</td>
+                    <td>14px</td>
+                    <td>400</td>
+                    <td>1.43</td>
+                    <td>روابط "Learn more"</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>4. Component Stylings</h2>
+        <h3>Buttons</h3>
+        <p>
+            <a href="#" class="btn-primary">Primary Blue CTA</a>
+            <a href="#" class="pill-link">Learn More</a>
+        </p>
+        <div class="card" style="background-color: var(--apple-dark-surface); color: white;">
+            <h4>Navigation Glass Effect</h4>
+            <p>خلفية: <code>rgba(0, 0, 0, 0.8)</code> مع تأثير <code>backdrop-filter: blur(20px)</code>.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Do's and Don'ts</h2>
+        <div style="display: flex; gap: 20px;">
+            <div style="flex: 1; border-right: 4px solid green; padding-right: 15px;">
+                <h4 style="color: green;">Do</h4>
+                <ul>
+                    <li>استخدم لون آبل الأزرق فقط للعناصر التفاعلية.</li>
+                    <li>حافظ على تباعد أحرف ضيق (Negative tracking).</li>
+                </ul>
+            </div>
+            <div style="flex: 1; border-right: 4px solid red; padding-right: 15px;">
+                <h4 style="color: red;">Don't</h4>
+                <ul>
+                    <li>لا تستخدم الظلال الثقيلة أو المتعددة.</li>
+                    <li>لا تستخدم حدوداً (Borders) على البطاقات.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="section-light" style="text-align: center; margin-top: 50px;">
+    <div class="container">
+        <p>© 2026 Apple Design System Study - تم الضبط للتوافق مع HTML5</p>
+    </div>
+</footer>
+
+</body>
+</html>
