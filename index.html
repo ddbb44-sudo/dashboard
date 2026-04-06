@@ -1,230 +1,296 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام تصميم آبل - دليل المعايير</title>
-    <style>
-        :root {
-            /* الألوان الأساسية */
-            --apple-black: #000000;
-            --apple-light-gray: #f5f5f7;
-            --apple-near-black: #1d1d1f;
-            --apple-blue: #0071e3;
-            --apple-link-blue: #0066cc;
-            --apple-dark-surface: #272729;
-            
-            /* الشفافية */
-            --nav-bg: rgba(0, 0, 0, 0.8);
-            
-            /* الخطوط (افتراضية في حال عدم توفر SF Pro) */
-            --font-display: "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            --font-text: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Riyadh Glass - Service Configurator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#f5f5f7",
+                        "tertiary": "#1d1d1f",
+                        "surface-variant": "#f5f5f7",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#f5f5f7",
+                        "surface-bright": "#ffffff",
+                        "on-primary-container": "#ffffff",
+                        "background": "#f9f9f9",
+                        "surface": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "inverse-on-surface": "#ffffff",
+                        "on-secondary-container": "#1d1d1f",
+                        "secondary": "#86868b",
+                        "on-primary-fixed": "#001b3f",
+                        "inverse-primary": "#abc7ff",
+                        "secondary-container": "#f5f5f7",
+                        "tertiary-fixed": "#e2e2e4",
+                        "on-secondary-fixed": "#1d1d1f",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ffffff",
+                        "outline": "#d2d2d7",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#e8e8ed",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#00458f",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1d1d1f",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "surface-container-low": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#454749",
+                        "surface-tint": "#0071e3",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "inverse-surface": "#1d1d1f",
+                        "on-background": "#1d1d1f",
+                        "primary-fixed-dim": "#abc7ff",
+                        "surface-container-high": "#e8e8ed",
+                        "primary-container": "#0071e3",
+                        "on-surface-variant": "#86868b",
+                        "surface-container": "#f5f5f7",
+                        "primary-fixed": "#d7e2ff",
+                        "secondary-fixed-dim": "#e2e2e4",
+                        "primary": "#0071e3",
+                        "surface-container-highest": "#d2d2d7",
+                        "tertiary-container": "#303030",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Public Sans"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
         }
-
-        body {
-            font-family: var(--font-text);
-            line-height: 1.47;
-            color: var(--apple-near-black);
-            margin: 0;
-            background-color: #ffffff;
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; overflow: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-
-        header {
-            background-color: var(--nav-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            color: white;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-display);
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        h1 { font-size: 56px; line-height: 1.07; margin-bottom: 24px; }
-        h2 { font-size: 40px; line-height: 1.10; margin-top: 60px; border-bottom: 1px solid #d2d2d7; padding-bottom: 10px; }
-        h3 { font-size: 28px; line-height: 1.14; margin-top: 30px; }
-
-        .section-dark {
-            background-color: var(--apple-black);
-            color: white;
-            padding: 80px 0;
-        }
-
-        .section-light {
-            background-color: var(--apple-light-gray);
-            padding: 80px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 14px;
-        }
-
-        th, td {
-            text-align: right;
-            padding: 12px;
-            border-bottom: 1px solid #d2d2d7;
-        }
-
-        th { background-color: #f5f5f7; font-weight: 600; }
-
-        .btn-primary {
-            background-color: var(--apple-blue);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 400;
-        }
-
-        .pill-link {
-            color: var(--apple-link-blue);
-            text-decoration: none;
-            border: 1px solid var(--apple-link-blue);
-            padding: 5px 15px;
-            border-radius: 980px;
-            font-size: 14px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
-            margin-top: 20px;
-        }
-
-        ul { line-height: 1.8; }
-        code { background: #f0f0f0; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
     </style>
 </head>
-<body>
-
-<header>
-    <div>Design System: Apple</div>
+<body class="bg-background text-on-background h-full overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col bg-[#f5f5f7] dark:bg-slate-900 h-full w-[280px] border-r border-[#d2d2d7]/30 transition-all duration-200 ease-in-out font-['Public_Sans'] font-normal text-[14px]">
+<div class="p-8 flex flex-col gap-1">
+<div class="text-xl font-bold text-slate-900 dark:text-white">Service</div>
+<div class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Configurator</div>
+</div>
+<nav class="flex-1 flex flex-col mt-4">
+<!-- Nav Item 1: Inactive -->
+<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined mr-4">person</span>
+<span>Customer Info</span>
+</div>
+<!-- Nav Item 2: Inactive -->
+<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined mr-4">directions_car</span>
+<span>Vehicle Selection</span>
+</div>
+<!-- Nav Item 3: Active (Mapping to current content) -->
+<div class="flex items-center px-8 py-4 text-[#0071e3] font-semibold border-r-2 border-[#0071e3] hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined mr-4">build</span>
+<span>Service Details</span>
+</div>
+<!-- Nav Item 4: Inactive -->
+<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined mr-4">location_on</span>
+<span>Location</span>
+</div>
+<!-- Nav Item 5: Inactive -->
+<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined mr-4">calendar_month</span>
+<span>Schedule</span>
+</div>
+<!-- Nav Item 6: Inactive -->
+<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined mr-4">payments</span>
+<span>Payment</span>
+</div>
+</nav>
+<div class="p-8 mt-auto border-t border-[#d2d2d7]/20">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden">
+<img alt="Riyadh Glass Logo" class="w-full h-full object-cover" data-alt="minimalist sleek logo of a modern automotive glass brand Riyadh Glass monochrome style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdcvQvJh5iTeQ98Jyk2zyCxW339PuxAUmXRqBCcwGb_mNzRETUxt2GPBz0_lihm8HB7zigPDWL07Xj29QSCQIG6GRKXIoJwZ8oZLOI9yXOK6q6n2t5JWQzM1HY6cPXAJHixEyBeTHG2wPs8ZBieFl_C3JyG_WR91p_osX7zijSzQCzSsqH9KYyA0LqOMQ8pto8eQheexnDTZGz6VQ3O7IoqhyJqJeamA9HXGREmNUzUOUQuPg0hyLQpIF5-iioaUw40TPWbuL7gxM"/>
+</div>
+<div class="text-[12px] font-semibold text-slate-900">Riyadh Glass Pro</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-[280px] h-16 flex justify-between items-center px-8 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-[#d2d2d7]/30 transition-all font-['Public_Sans'] font-bold text-[21px]">
+<div class="text-lg font-bold text-slate-900 dark:text-white">Riyadh Glass</div>
+<div class="flex items-center gap-4">
+<span class="text-[#0071e3] dark:text-blue-500 text-2xl font-extrabold tracking-tight">7,500 SAR</span>
+</div>
 </header>
-
-<main class="container">
-    <section>
-        <h1>Design System: Apple</h1>
-        
-        <h2>1. Visual Theme & Atmosphere</h2>
-        <p>يعتبر موقع آبل الإلكتروني نموذجاً في الدراما المدروسة — مساحات شاسعة من الأسود الصافي والأبيض القريب لتعمل كخلفيات سينمائية للمنتجات التي يتم تصويرها كأنها منحوتات في معرض فني.</p>
-        
-        <div class="card">
-            <strong>الخصائص الرئيسية:</strong>
-            <ul>
-                <li>خطوط SF Pro Display/Text مع التحجيم البصري التلقائي.</li>
-                <li>إيقاع ثنائي للأقسام: أسود (<code>#000000</code>) متبادل مع رمادي فاتح (<code>#f5f5f7</code>).</li>
-                <li>لون تمييز واحد: أزرق آبل (<code>#0071e3</code>) للعناصر التفاعلية فقط.</li>
-                <li>فراغات بيضاء سخية بين الأقسام.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Color Palette & Roles</h2>
-        <h3>Primary</h3>
-        <ul>
-            <li><strong>Pure Black (<code>#000000</code>):</strong> خلفيات أقسام البطولة، عرض المنتجات الغامر.</li>
-            <li><strong>Light Gray (<code>#f5f5f7</code>):</strong> خلفيات الأقسام البديلة، المناطق المعلوماتية.</li>
-            <li><strong>Near Black (<code>#1d1d1f</code>):</strong> النص الأساسي على الخلفيات الفاتحة.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>3. Typography Rules</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Role</th>
-                    <th>Size</th>
-                    <th>Weight</th>
-                    <th>Line Height</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Display Hero</td>
-                    <td>56px</td>
-                    <td>600</td>
-                    <td>1.07</td>
-                    <td>عناوين إطلاق المنتجات</td>
-                </tr>
-                <tr>
-                    <td>Body</td>
-                    <td>17px</td>
-                    <td>400</td>
-                    <td>1.47</td>
-                    <td>نص القراءة القياسي</td>
-                </tr>
-                <tr>
-                    <td>Link</td>
-                    <td>14px</td>
-                    <td>400</td>
-                    <td>1.43</td>
-                    <td>روابط "Learn more"</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section>
-        <h2>4. Component Stylings</h2>
-        <h3>Buttons</h3>
-        <p>
-            <a href="#" class="btn-primary">Primary Blue CTA</a>
-            <a href="#" class="pill-link">Learn More</a>
-        </p>
-        <div class="card" style="background-color: var(--apple-dark-surface); color: white;">
-            <h4>Navigation Glass Effect</h4>
-            <p>خلفية: <code>rgba(0, 0, 0, 0.8)</code> مع تأثير <code>backdrop-filter: blur(20px)</code>.</p>
-        </div>
-    </section>
-
-    <section>
-        <h2>5. Do's and Don'ts</h2>
-        <div style="display: flex; gap: 20px;">
-            <div style="flex: 1; border-right: 4px solid green; padding-right: 15px;">
-                <h4 style="color: green;">Do</h4>
-                <ul>
-                    <li>استخدم لون آبل الأزرق فقط للعناصر التفاعلية.</li>
-                    <li>حافظ على تباعد أحرف ضيق (Negative tracking).</li>
-                </ul>
-            </div>
-            <div style="flex: 1; border-right: 4px solid red; padding-right: 15px;">
-                <h4 style="color: red;">Don't</h4>
-                <ul>
-                    <li>لا تستخدم الظلال الثقيلة أو المتعددة.</li>
-                    <li>لا تستخدم حدوداً (Borders) على البطاقات.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<!-- Main Workspace -->
+<main class="ml-[280px] pt-16 pb-20 h-full overflow-hidden flex flex-col">
+<!-- Horizontal Editorial Flow: Service Columns -->
+<section class="flex-1 flex overflow-x-auto no-scrollbar bg-surface divide-x divide-[#d2d2d7]/30">
+<!-- Column 1: Window Film -->
+<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface">
+<div class="mb-4">
+<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Protection Layer 01</span>
+<h2 class="text-[21px] font-semibold text-on-surface mt-1">Window Film</h2>
+</div>
+<div class="flex-1 space-y-6">
+<!-- Segmented Selectors -->
+<div class="space-y-3">
+<label class="text-[11px] font-bold text-secondary uppercase">Heat Rejection Level</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 border-2 border-primary text-primary text-[13px] font-semibold rounded-xl bg-primary/5">Crystal Clear</button>
+<button class="py-2 px-3 border border-outline text-on-surface-variant text-[13px] font-medium rounded-xl hover:bg-surface-container transition-colors">Infrared Max</button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-[11px] font-bold text-secondary uppercase">Tint Percentage</label>
+<div class="flex flex-wrap gap-2">
+<button class="flex-1 py-2 border border-outline text-on-surface text-[12px] font-bold rounded-xl">0%</button>
+<button class="flex-1 py-2 border-2 border-primary text-primary text-[12px] font-bold rounded-xl">30%</button>
+<button class="flex-1 py-2 border border-outline text-on-surface text-[12px] font-bold rounded-xl">50%</button>
+</div>
+</div>
+<div class="p-4 rounded-xl border border-outline bg-surface-container-low mt-4">
+<div class="text-[11px] font-bold text-secondary uppercase mb-2">Technical Specs</div>
+<ul class="text-[13px] space-y-2 text-on-surface">
+<li class="flex justify-between"><span>UV Rejection</span> <span class="font-semibold">99.9%</span></li>
+<li class="flex justify-between"><span>Warranty</span> <span class="font-semibold">10 Years</span></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Column 2: Paint Protection (PPF) -->
+<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface-container">
+<div class="mb-4">
+<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Protection Layer 02</span>
+<h2 class="text-[21px] font-semibold text-on-surface mt-1">Paint Protection</h2>
+</div>
+<div class="flex-1 space-y-6">
+<div class="space-y-3">
+<label class="text-[11px] font-bold text-secondary uppercase">Finish Type</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 border border-outline text-on-surface-variant text-[13px] font-medium rounded-xl">Glossy Prime</button>
+<button class="py-2 px-3 border-2 border-primary text-primary text-[13px] font-semibold rounded-xl bg-primary/5">Satin Matte</button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-[11px] font-bold text-secondary uppercase">Coverage Area</label>
+<div class="space-y-2">
+<button class="w-full py-3 px-4 border border-outline text-left text-[14px] font-medium rounded-xl flex justify-between items-center bg-surface">
+                                Full Frontal <span>2,400 SAR</span>
+</button>
+<button class="w-full py-3 px-4 border-2 border-primary text-left text-[14px] font-semibold rounded-xl flex justify-between items-center bg-white shadow-sm">
+                                Full Vehicle <span>6,200 SAR</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: Ceramic Coating -->
+<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface">
+<div class="mb-4">
+<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Protection Layer 03</span>
+<h2 class="text-[21px] font-semibold text-on-surface mt-1">Ceramic Coating</h2>
+</div>
+<div class="flex-1 space-y-6">
+<div class="space-y-3">
+<label class="text-[11px] font-bold text-secondary uppercase">Durability Tier</label>
+<div class="flex flex-col gap-2">
+<button class="w-full py-3 px-4 border border-outline text-left text-[14px] font-medium rounded-xl flex items-center justify-between">
+                                3-Year Protection <span class="text-[11px] font-bold text-primary">SELECT</span>
+</button>
+<button class="w-full py-3 px-4 border-2 border-primary text-left text-[14px] font-semibold rounded-xl flex items-center justify-between bg-primary/5">
+                                5-Year Diamond <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 4: Interior & Detailing -->
+<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface-container">
+<div class="mb-4">
+<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Final Touch 04</span>
+<h2 class="text-[21px] font-semibold text-on-surface mt-1">Polishing</h2>
+</div>
+<div class="flex-1 space-y-4">
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 bg-white rounded-xl border border-outline/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">flare</span>
+<span class="text-[14px] font-medium">Headlight Restoration</span>
+</div>
+<input checked="" class="rounded-full text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between p-3 bg-white rounded-xl border border-outline/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">dry_cleaning</span>
+<span class="text-[14px] font-medium">Leather Treatment</span>
+</div>
+<input class="rounded-full text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</div>
+</div>
+<div class="mt-8">
+<label class="text-[11px] font-bold text-secondary uppercase block mb-4">Advanced Options</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square rounded-2xl border-2 border-dashed border-outline/30 flex flex-col items-center justify-center text-center p-4">
+<span class="material-symbols-outlined text-secondary mb-2">add_circle</span>
+<span class="text-[12px] font-semibold">Custom Tint</span>
+</div>
+<div class="aspect-square rounded-2xl border-2 border-dashed border-outline/30 flex flex-col items-center justify-center text-center p-4">
+<span class="material-symbols-outlined text-secondary mb-2">contactless</span>
+<span class="text-[12px] font-semibold">Home Pickup</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 </main>
-
-<footer class="section-light" style="text-align: center; margin-top: 50px;">
-    <div class="container">
-        <p>© 2026 Apple Design System Study - تم الضبط للتوافق مع HTML5</p>
-    </div>
+<!-- BottomNavBar Shell (Utility Bar) -->
+<footer class="fixed bottom-0 right-0 left-[280px] h-20 flex justify-between items-center px-12 z-50 bg-[#1d1d1f] dark:bg-black shadow-lg font-['Public_Sans'] font-medium text-[12px] uppercase">
+<!-- Completion Forecast Card (High-Contrast) -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#f5f5f7] opacity-60 text-[10px] font-bold">Completion Forecast</span>
+<span class="text-white text-[13px] font-semibold tracking-normal">Approx. 48 Hours</span>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-white/20"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white">event_available</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#f5f5f7] opacity-60 text-[10px] font-bold">Drop-off Schedule</span>
+<span class="text-white text-[13px] font-semibold tracking-normal">Oct 24, 09:00 AM</span>
+</div>
+</div>
+</div>
+<button class="bg-[#0071e3] text-white rounded-lg px-8 py-3 font-bold text-[13px] tracking-wide scale-100 hover:opacity-90 active:scale-95 transition-transform flex items-center gap-2">
+            Confirm Booking
+            <span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
 </footer>
-
-</body>
-</html>
+</body></html>
