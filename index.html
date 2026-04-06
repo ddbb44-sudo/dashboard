@@ -1,296 +1,446 @@
 <!DOCTYPE html>
-
-<html class="h-full" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Riyadh Glass - Service Configurator</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Service Configurator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --sf-display: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --sf-text: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            font-family: var(--sf-text);
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.022em;
+        }
+        .apple-title {
+            font-family: var(--sf-display);
+            font-weight: 600;
+            line-height: 1.14;
+            letter-spacing: 0.012em;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Smooth transitions for interactive elements */
+        button, .toggle-switch, .custom-checkbox, .selectable-card {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+    
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "on-primary": "#ffffff",
-                        "surface-dim": "#f5f5f7",
-                        "tertiary": "#1d1d1f",
-                        "surface-variant": "#f5f5f7",
-                        "on-tertiary": "#ffffff",
-                        "secondary-fixed": "#f5f5f7",
-                        "surface-bright": "#ffffff",
-                        "on-primary-container": "#ffffff",
+                    colors: {
+                        "primary": "#0059b5",
+                        "primary-container": "#0071e3",
+                        "on-primary-container": "#fcfbff",
                         "background": "#f9f9f9",
                         "surface": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "on-tertiary-fixed-variant": "#474649",
-                        "inverse-on-surface": "#ffffff",
-                        "on-secondary-container": "#1d1d1f",
                         "secondary": "#86868b",
-                        "on-primary-fixed": "#001b3f",
-                        "inverse-primary": "#abc7ff",
-                        "secondary-container": "#f5f5f7",
-                        "tertiary-fixed": "#e2e2e4",
-                        "on-secondary-fixed": "#1d1d1f",
-                        "on-error-container": "#93000a",
-                        "on-tertiary-container": "#ffffff",
-                        "outline": "#d2d2d7",
-                        "on-secondary": "#ffffff",
-                        "outline-variant": "#e8e8ed",
-                        "on-error": "#ffffff",
-                        "on-primary-fixed-variant": "#00458f",
-                        "error-container": "#ffdad6",
-                        "on-surface": "#1d1d1f",
-                        "tertiary-fixed-dim": "#c8c6c8",
-                        "surface-container-low": "#f9f9f9",
-                        "on-secondary-fixed-variant": "#454749",
-                        "surface-tint": "#0071e3",
-                        "on-tertiary-fixed": "#1b1b1d",
-                        "inverse-surface": "#1d1d1f",
-                        "on-background": "#1d1d1f",
-                        "primary-fixed-dim": "#abc7ff",
-                        "surface-container-high": "#e8e8ed",
-                        "primary-container": "#0071e3",
-                        "on-surface-variant": "#86868b",
-                        "surface-container": "#f5f5f7",
-                        "primary-fixed": "#d7e2ff",
-                        "secondary-fixed-dim": "#e2e2e4",
-                        "primary": "#0071e3",
-                        "surface-container-highest": "#d2d2d7",
-                        "tertiary-container": "#303030",
-                        "error": "#ba1a1a"
+                        "apple-gray": "#f5f5f7",
+                        "apple-dark": "#1d1d1f",
+                        "apple-blue": "#0071e3",
+                        "apple-link": "#0066cc"
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Public Sans"],
-                        "body": ["Public Sans"],
-                        "label": ["Public Sans"]
+                    borderRadius: {
+                        "apple-sm": "8px",
+                        "apple-md": "12px",
+                        "apple-lg": "20px",
+                        "pill": "980px"
                     }
-                },
-            },
+                }
+            }
         }
     </script>
-<style>
-        body { font-family: 'Public Sans', sans-serif; overflow: hidden; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
 </head>
-<body class="bg-background text-on-background h-full overflow-hidden">
-<!-- SideNavBar Shell -->
-<aside class="fixed left-0 top-0 h-full flex flex-col bg-[#f5f5f7] dark:bg-slate-900 h-full w-[280px] border-r border-[#d2d2d7]/30 transition-all duration-200 ease-in-out font-['Public_Sans'] font-normal text-[14px]">
-<div class="p-8 flex flex-col gap-1">
-<div class="text-xl font-bold text-slate-900 dark:text-white">Service</div>
-<div class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Configurator</div>
-</div>
-<nav class="flex-1 flex flex-col mt-4">
-<!-- Nav Item 1: Inactive -->
-<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
-<span class="material-symbols-outlined mr-4">person</span>
-<span>Customer Info</span>
-</div>
-<!-- Nav Item 2: Inactive -->
-<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
-<span class="material-symbols-outlined mr-4">directions_car</span>
-<span>Vehicle Selection</span>
-</div>
-<!-- Nav Item 3: Active (Mapping to current content) -->
-<div class="flex items-center px-8 py-4 text-[#0071e3] font-semibold border-r-2 border-[#0071e3] hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
-<span class="material-symbols-outlined mr-4">build</span>
-<span>Service Details</span>
-</div>
-<!-- Nav Item 4: Inactive -->
-<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
-<span class="material-symbols-outlined mr-4">location_on</span>
-<span>Location</span>
-</div>
-<!-- Nav Item 5: Inactive -->
-<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
-<span class="material-symbols-outlined mr-4">calendar_month</span>
-<span>Schedule</span>
-</div>
-<!-- Nav Item 6: Inactive -->
-<div class="flex items-center px-8 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800 cursor-pointer">
-<span class="material-symbols-outlined mr-4">payments</span>
-<span>Payment</span>
-</div>
-</nav>
-<div class="p-8 mt-auto border-t border-[#d2d2d7]/20">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden">
-<img alt="Riyadh Glass Logo" class="w-full h-full object-cover" data-alt="minimalist sleek logo of a modern automotive glass brand Riyadh Glass monochrome style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdcvQvJh5iTeQ98Jyk2zyCxW339PuxAUmXRqBCcwGb_mNzRETUxt2GPBz0_lihm8HB7zigPDWL07Xj29QSCQIG6GRKXIoJwZ8oZLOI9yXOK6q6n2t5JWQzM1HY6cPXAJHixEyBeTHG2wPs8ZBieFl_C3JyG_WR91p_osX7zijSzQCzSsqH9KYyA0LqOMQ8pto8eQheexnDTZGz6VQ3O7IoqhyJqJeamA9HXGREmNUzUOUQuPg0hyLQpIF5-iioaUw40TPWbuL7gxM"/>
-</div>
-<div class="text-[12px] font-semibold text-slate-900">Riyadh Glass Pro</div>
-</div>
-</div>
-</aside>
-<!-- TopNavBar Shell -->
-<header class="fixed top-0 right-0 left-[280px] h-16 flex justify-between items-center px-8 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-[#d2d2d7]/30 transition-all font-['Public_Sans'] font-bold text-[21px]">
-<div class="text-lg font-bold text-slate-900 dark:text-white">Riyadh Glass</div>
-<div class="flex items-center gap-4">
-<span class="text-[#0071e3] dark:text-blue-500 text-2xl font-extrabold tracking-tight">7,500 SAR</span>
-</div>
-</header>
-<!-- Main Workspace -->
-<main class="ml-[280px] pt-16 pb-20 h-full overflow-hidden flex flex-col">
-<!-- Horizontal Editorial Flow: Service Columns -->
-<section class="flex-1 flex overflow-x-auto no-scrollbar bg-surface divide-x divide-[#d2d2d7]/30">
-<!-- Column 1: Window Film -->
-<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface">
-<div class="mb-4">
-<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Protection Layer 01</span>
-<h2 class="text-[21px] font-semibold text-on-surface mt-1">Window Film</h2>
-</div>
-<div class="flex-1 space-y-6">
-<!-- Segmented Selectors -->
-<div class="space-y-3">
-<label class="text-[11px] font-bold text-secondary uppercase">Heat Rejection Level</label>
-<div class="grid grid-cols-2 gap-2">
-<button class="py-2 px-3 border-2 border-primary text-primary text-[13px] font-semibold rounded-xl bg-primary/5">Crystal Clear</button>
-<button class="py-2 px-3 border border-outline text-on-surface-variant text-[13px] font-medium rounded-xl hover:bg-surface-container transition-colors">Infrared Max</button>
-</div>
-</div>
-<div class="space-y-3">
-<label class="text-[11px] font-bold text-secondary uppercase">Tint Percentage</label>
-<div class="flex flex-wrap gap-2">
-<button class="flex-1 py-2 border border-outline text-on-surface text-[12px] font-bold rounded-xl">0%</button>
-<button class="flex-1 py-2 border-2 border-primary text-primary text-[12px] font-bold rounded-xl">30%</button>
-<button class="flex-1 py-2 border border-outline text-on-surface text-[12px] font-bold rounded-xl">50%</button>
-</div>
-</div>
-<div class="p-4 rounded-xl border border-outline bg-surface-container-low mt-4">
-<div class="text-[11px] font-bold text-secondary uppercase mb-2">Technical Specs</div>
-<ul class="text-[13px] space-y-2 text-on-surface">
-<li class="flex justify-between"><span>UV Rejection</span> <span class="font-semibold">99.9%</span></li>
-<li class="flex justify-between"><span>Warranty</span> <span class="font-semibold">10 Years</span></li>
-</ul>
-</div>
-</div>
-</div>
-<!-- Column 2: Paint Protection (PPF) -->
-<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface-container">
-<div class="mb-4">
-<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Protection Layer 02</span>
-<h2 class="text-[21px] font-semibold text-on-surface mt-1">Paint Protection</h2>
-</div>
-<div class="flex-1 space-y-6">
-<div class="space-y-3">
-<label class="text-[11px] font-bold text-secondary uppercase">Finish Type</label>
-<div class="grid grid-cols-2 gap-2">
-<button class="py-2 px-3 border border-outline text-on-surface-variant text-[13px] font-medium rounded-xl">Glossy Prime</button>
-<button class="py-2 px-3 border-2 border-primary text-primary text-[13px] font-semibold rounded-xl bg-primary/5">Satin Matte</button>
-</div>
-</div>
-<div class="space-y-3">
-<label class="text-[11px] font-bold text-secondary uppercase">Coverage Area</label>
-<div class="space-y-2">
-<button class="w-full py-3 px-4 border border-outline text-left text-[14px] font-medium rounded-xl flex justify-between items-center bg-surface">
-                                Full Frontal <span>2,400 SAR</span>
-</button>
-<button class="w-full py-3 px-4 border-2 border-primary text-left text-[14px] font-semibold rounded-xl flex justify-between items-center bg-white shadow-sm">
-                                Full Vehicle <span>6,200 SAR</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Column 3: Ceramic Coating -->
-<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface">
-<div class="mb-4">
-<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Protection Layer 03</span>
-<h2 class="text-[21px] font-semibold text-on-surface mt-1">Ceramic Coating</h2>
-</div>
-<div class="flex-1 space-y-6">
-<div class="space-y-3">
-<label class="text-[11px] font-bold text-secondary uppercase">Durability Tier</label>
-<div class="flex flex-col gap-2">
-<button class="w-full py-3 px-4 border border-outline text-left text-[14px] font-medium rounded-xl flex items-center justify-between">
-                                3-Year Protection <span class="text-[11px] font-bold text-primary">SELECT</span>
-</button>
-<button class="w-full py-3 px-4 border-2 border-primary text-left text-[14px] font-semibold rounded-xl flex items-center justify-between bg-primary/5">
-                                5-Year Diamond <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Column 4: Interior & Detailing -->
-<div class="min-w-[320px] flex-1 flex flex-col p-6 bg-surface-container">
-<div class="mb-4">
-<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest">Final Touch 04</span>
-<h2 class="text-[21px] font-semibold text-on-surface mt-1">Polishing</h2>
-</div>
-<div class="flex-1 space-y-4">
-<div class="space-y-2">
-<div class="flex items-center justify-between p-3 bg-white rounded-xl border border-outline/50">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary">flare</span>
-<span class="text-[14px] font-medium">Headlight Restoration</span>
-</div>
-<input checked="" class="rounded-full text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
-</div>
-<div class="flex items-center justify-between p-3 bg-white rounded-xl border border-outline/50">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary">dry_cleaning</span>
-<span class="text-[14px] font-medium">Leather Treatment</span>
-</div>
-<input class="rounded-full text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
-</div>
-</div>
-<div class="mt-8">
-<label class="text-[11px] font-bold text-secondary uppercase block mb-4">Advanced Options</label>
-<div class="grid grid-cols-2 gap-4">
-<div class="aspect-square rounded-2xl border-2 border-dashed border-outline/30 flex flex-col items-center justify-center text-center p-4">
-<span class="material-symbols-outlined text-secondary mb-2">add_circle</span>
-<span class="text-[12px] font-semibold">Custom Tint</span>
-</div>
-<div class="aspect-square rounded-2xl border-2 border-dashed border-outline/30 flex flex-col items-center justify-center text-center p-4">
-<span class="material-symbols-outlined text-secondary mb-2">contactless</span>
-<span class="text-[12px] font-semibold">Home Pickup</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- BottomNavBar Shell (Utility Bar) -->
-<footer class="fixed bottom-0 right-0 left-[280px] h-20 flex justify-between items-center px-12 z-50 bg-[#1d1d1f] dark:bg-black shadow-lg font-['Public_Sans'] font-medium text-[12px] uppercase">
-<!-- Completion Forecast Card (High-Contrast) -->
-<div class="flex items-center gap-6">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">timer</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[#f5f5f7] opacity-60 text-[10px] font-bold">Completion Forecast</span>
-<span class="text-white text-[13px] font-semibold tracking-normal">Approx. 48 Hours</span>
-</div>
-</div>
-<div class="h-8 w-[1px] bg-white/20"></div>
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-white">event_available</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[#f5f5f7] opacity-60 text-[10px] font-bold">Drop-off Schedule</span>
-<span class="text-white text-[13px] font-semibold tracking-normal">Oct 24, 09:00 AM</span>
-</div>
-</div>
-</div>
-<button class="bg-[#0071e3] text-white rounded-lg px-8 py-3 font-bold text-[13px] tracking-wide scale-100 hover:opacity-90 active:scale-95 transition-transform flex items-center gap-2">
-            Confirm Booking
-            <span class="material-symbols-outlined text-[18px]">check_circle</span>
-</button>
-</footer>
-</body></html>
+<body class="bg-background text-apple-dark m-0 p-0 h-screen flex flex-col overflow-hidden">
+
+    <!-- TopNavBar -->
+    <header class="shrink-0 w-full z-50 glass-nav border-b border-[#d2d2d7]/50 flex justify-between items-center h-14 px-4 md:px-6 relative">
+        <div class="flex items-center gap-2 md:gap-4 truncate">
+            <span class="text-lg md:text-xl font-semibold text-[#1d1d1f] flex items-center">
+                <span class="material-symbols-outlined mr-1 md:mr-2 text-[#0071e3]">directions_car</span>
+                <span class="hidden sm:inline">Service Configurator</span>
+                <span class="sm:hidden">Configurator</span>
+            </span>
+        </div>
+        <div class="flex items-center gap-3 md:gap-6 shrink-0">
+            <span class="font-['SF_Pro_Display'] font-bold tracking-tight text-[#1d1d1f] text-lg md:text-2xl">
+                <span class="hidden md:inline">Price: </span><span class="text-[#0071e3]">7,500 SAR</span>
+            </span>
+            <button class="text-[#0071e3] hover:opacity-70 font-semibold text-md md:text-lg hidden sm:block">Help</button>
+            <button class="hover:bg-gray-100 p-2 rounded-full transition-colors">
+                <span class="material-symbols-outlined text-[#1d1d1f] text-2xl">shopping_bag</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Application Area -->
+    <div class="flex flex-col md:flex-row flex-1 overflow-hidden relative">
+        
+        <!-- Sidebar Navigation (Horizontal on Mobile, Vertical on Desktop) -->
+        <aside class="w-full md:w-64 shrink-0 bg-[#f5f5f7] border-b md:border-b-0 md:border-r border-[#d2d2d7]/50 flex flex-row md:flex-col p-2 md:p-4 gap-2 overflow-x-auto hide-scrollbar z-40">
+            <div class="hidden md:block mb-4 px-2 mt-2">
+                <h2 class="text-lg font-bold text-[#1d1d1f]">Booking Steps</h2>
+                <p class="text-[13px] text-[#86868b]">Configure your vehicle service</p>
+            </div>
+            
+            <nav class="flex flex-row md:flex-col gap-1 md:gap-2">
+                <a class="flex items-center gap-2 md:gap-3 px-3 py-2 bg-white text-[#1d1d1f] font-semibold rounded-lg shadow-sm whitespace-nowrap shrink-0" href="#">
+                    <span class="material-symbols-outlined text-[#0071e3]">directions_car</span>
+                    <span class="text-[14px] md:text-[15px]">Service Details</span>
+                </a>
+                <a class="flex items-center gap-2 md:gap-3 px-3 py-2 text-[#86868b] hover:bg-[#e8e8ed] rounded-lg whitespace-nowrap shrink-0" href="#">
+                    <span class="material-symbols-outlined">build</span>
+                    <span class="text-[14px] md:text-[15px]">Maintenance</span>
+                </a>
+                <a class="flex items-center gap-2 md:gap-3 px-3 py-2 text-[#86868b] hover:bg-[#e8e8ed] rounded-lg whitespace-nowrap shrink-0" href="#">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <span class="text-[14px] md:text-[15px]">Location</span>
+                </a>
+                <a class="flex items-center gap-2 md:gap-3 px-3 py-2 text-[#86868b] hover:bg-[#e8e8ed] rounded-lg whitespace-nowrap shrink-0" href="#">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    <span class="text-[14px] md:text-[15px]">Schedule</span>
+                </a>
+                <a class="flex items-center gap-2 md:gap-3 px-3 py-2 text-[#86868b] hover:bg-[#e8e8ed] rounded-lg whitespace-nowrap shrink-0" href="#">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span class="text-[14px] md:text-[15px]">Payment</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Right Side Workspace (Configurator & Bottom Row) -->
+        <div class="flex-1 flex flex-col overflow-hidden bg-white">
+            
+            <!-- Configurator Columns -->
+            <main class="flex-1 overflow-y-auto md:overflow-x-auto md:overflow-y-hidden flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-[#d2d2d7]/40 bg-white">
+                
+                <!-- Window Film Column -->
+                <section class="flex flex-col p-5 md:p-6 w-full md:w-80 shrink-0">
+                    <h3 class="apple-title font-bold text-[21px] mb-6">Window Film</h3>
+                    
+                    <label class="text-[12px] font-bold uppercase tracking-wider text-secondary mb-2 px-1">Film Quality</label>
+                    <div class="grid grid-cols-2 gap-2 mb-6 radio-group">
+                        <button class="py-3 rounded-apple-md bg-white border-2 border-apple-blue text-apple-dark font-semibold text-[14px] shadow-sm">Premium</button>
+                        <button class="py-3 rounded-apple-md bg-white border border-[#d2d2d7] text-secondary font-medium text-[14px]">Demeet</button>
+                    </div>
+
+                    <div class="space-y-3 card-group">
+                        <div class="selectable-card p-4 rounded-apple-md border-2 border-apple-blue bg-blue-50/30 flex flex-col gap-3 cursor-pointer">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-[15px] font-semibold text-apple-dark">Family Package</p>
+                                    <p class="text-[12px] text-secondary">70% - 50% - 20%</p>
+                                </div>
+                                <button class="text-apple-blue text-[13px] font-semibold hover:underline">Edit</button>
+                            </div>
+                        </div>
+                        <div class="selectable-card p-4 rounded-apple-md border border-[#d2d2d7] bg-white flex flex-col gap-3 cursor-pointer">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-[15px] font-semibold text-apple-dark">Elegant Package</p>
+                                    <p class="text-[12px] text-secondary">70% - 50%</p>
+                                </div>
+                                <button class="text-apple-blue text-[13px] font-semibold hover:underline">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PPF Column -->
+                <section class="flex flex-col p-5 md:p-6 w-full md:w-80 shrink-0 bg-apple-gray md:bg-transparent">
+                    <h3 class="apple-title font-bold text-[21px] mb-6">PPF</h3>
+
+                    <label class="text-[12px] font-bold uppercase tracking-wider text-secondary mb-2 px-1">Film Type</label>
+                    <div class="grid grid-cols-2 gap-2 mb-6 radio-group">
+                        <button class="py-3 rounded-apple-md bg-white border-2 border-apple-blue text-apple-dark font-semibold text-[14px] shadow-sm">X-Pro</button>
+                        <button class="py-3 rounded-apple-md bg-white border border-[#d2d2d7] text-secondary font-medium text-[14px]">X</button>
+                    </div>
+
+                    <label class="text-[12px] font-bold uppercase tracking-wider text-secondary mb-2 px-1">Coverage</label>
+                    <div class="space-y-3 card-group">
+                        <div class="selectable-card p-4 rounded-apple-md bg-blue-50/30 border-2 border-apple-blue flex justify-between items-center shadow-sm cursor-pointer">
+                            <div>
+                                <p class="text-[15px] font-semibold text-apple-dark">Full</p>
+                                <p class="text-[12px] text-secondary">10 Year Warranty</p>
+                            </div>
+                            <button class="text-apple-blue text-[13px] font-semibold hover:underline">Edit</button>
+                        </div>
+                        <div class="selectable-card p-4 rounded-apple-md bg-white border border-[#d2d2d7] flex justify-between items-center cursor-pointer">
+                            <div>
+                                <p class="text-[15px] font-semibold text-apple-dark">Front</p>
+                                <p class="text-[12px] text-secondary">5 Year Warranty</p>
+                            </div>
+                            <button class="text-apple-blue text-[13px] font-semibold hover:underline">Edit</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ceramic Column -->
+                <section class="flex flex-col p-5 md:p-6 w-full md:w-80 shrink-0">
+                    <h3 class="apple-title font-bold text-[21px] mb-6">Ceramic</h3>
+
+                    <label class="text-[12px] font-bold uppercase tracking-wider text-secondary mb-2 px-1">Coating Level</label>
+                    <div class="grid grid-cols-2 gap-2 mb-6 radio-group">
+                        <button class="py-3 rounded-apple-md bg-white border-2 border-apple-blue text-apple-dark font-semibold text-[14px] shadow-sm">9H Pro</button>
+                        <button class="py-3 rounded-apple-md bg-white border border-[#d2d2d7] text-secondary font-medium text-[14px]">Basic</button>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-[15px] font-semibold text-apple-dark">Interior Coating</p>
+                                <p class="text-[12px] text-secondary">Leather & Fabric</p>
+                            </div>
+                            <div class="toggle-switch w-12 h-6 bg-apple-blue rounded-full relative p-0.5 cursor-pointer flex items-center">
+                                <div class="absolute right-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-[15px] font-semibold text-apple-dark">Exterior 9H</p>
+                                <p class="text-[12px] text-secondary">Multi-layer protection</p>
+                            </div>
+                            <div class="toggle-switch w-12 h-6 bg-[#d2d2d7] rounded-full relative p-0.5 cursor-pointer flex items-center">
+                                <div class="absolute left-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-4 rounded-apple-md bg-[#f9f9f9] border border-dashed border-[#d2d2d7]">
+                            <p class="text-[13px] text-center text-secondary">Recommended with Polishing</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Polishing Column -->
+                <section class="flex flex-col p-5 md:p-6 w-full md:w-80 shrink-0 bg-apple-gray md:bg-transparent">
+                    <h3 class="apple-title font-bold text-[21px] mb-6">Polishing</h3>
+
+                    <label class="text-[12px] font-bold uppercase tracking-wider text-secondary mb-2 px-1">Finish Type</label>
+                    <div class="grid grid-cols-2 gap-2 mb-6 radio-group">
+                        <button class="py-3 rounded-apple-md bg-white border-2 border-apple-blue text-apple-dark font-semibold text-[14px] shadow-sm">Mirror</button>
+                        <button class="py-3 rounded-apple-md bg-white border border-[#d2d2d7] text-secondary font-medium text-[14px]">Standard</button>
+                    </div>
+
+                    <div class="flex flex-col gap-4 flex-1">
+                        <button class="w-full p-4 rounded-apple-md bg-blue-50/30 border-2 border-apple-blue flex items-center gap-3 selectable-btn cursor-pointer">
+                            <span class="material-symbols-outlined text-apple-blue" style='font-variation-settings: "FILL" 1;'>check_circle</span>
+                            <div class="text-left">
+                                <p class="text-[15px] font-semibold text-apple-dark">Standard Polish</p>
+                                <p class="text-[12px] text-secondary">1-Stage Paint Correction</p>
+                            </div>
+                        </button>
+                        
+                        <div class="mt-auto pt-6 border-t border-[#d2d2d7]/50">
+                            <label class="custom-checkbox flex items-center gap-3 cursor-pointer group">
+                                <div class="box w-5 h-5 rounded border border-[#d2d2d7] bg-white flex items-center justify-center transition-colors">
+                                    <span class="material-symbols-outlined text-[14px] text-white opacity-0 transition-opacity" style='font-variation-settings: "wght" 700;'>check</span>
+                                </div>
+                                <span class="text-[14px] font-medium text-apple-dark group-hover:text-apple-blue transition-colors">Inside Cleaning</span>
+                            </label>
+                            
+                            <label class="custom-checkbox flex items-center gap-3 cursor-pointer group mt-4">
+                                <div class="box w-5 h-5 rounded border border-apple-blue bg-apple-blue flex items-center justify-center transition-colors">
+                                    <span class="material-symbols-outlined text-[14px] text-white opacity-100 transition-opacity" style='font-variation-settings: "wght" 700;'>check</span>
+                                </div>
+                                <span class="text-[14px] font-medium text-apple-dark group-hover:text-apple-blue transition-colors">Outside Detailing</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Additional Future Service Column -->
+                <section class="flex flex-col p-6 w-full md:w-80 shrink-0 items-center justify-center text-center bg-[#f9f9f9] border-dashed border-2 border-[#d2d2d7]/50 m-4 rounded-xl hidden md:flex">
+                    <span class="material-symbols-outlined text-4xl text-[#d2d2d7] mb-4">add_circle</span>
+                    <p class="text-secondary font-medium">More Services Coming Soon</p>
+                </section>
+                
+            </main>
+
+            <!-- Bottom Row (Options & Scheduling) - Responsive Flexbox -->
+            <div class="shrink-0 flex flex-col md:flex-row border-t border-[#d2d2d7]/50 bg-white md:h-28 overflow-y-auto md:overflow-visible max-h-64 md:max-h-none divide-y md:divide-y-0 md:divide-x divide-[#d2d2d7]/30 shadow-[0_-4px_20px_rgba(0,0,0,0.02)] z-30">
+                
+                <!-- Advanced Options -->
+                <div class="flex-1 flex flex-col justify-center p-5 md:px-8 gap-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[14px] font-medium text-apple-dark">Premium Touch Vehicle</span>
+                        <div class="toggle-switch w-10 h-5 bg-apple-blue rounded-full relative p-0.5 cursor-pointer flex items-center">
+                            <div class="absolute right-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-300"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-[14px] font-medium text-apple-dark">Old Film Removal</span>
+                        <div class="toggle-switch w-10 h-5 bg-[#d2d2d7] rounded-full relative p-0.5 cursor-pointer flex items-center">
+                            <div class="absolute left-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scheduling -->
+                <div class="flex-1 flex items-center p-5 md:px-8 gap-4">
+                    <div class="flex-1">
+                        <label class="text-[11px] font-bold uppercase text-secondary mb-1.5 block">Drop-off Date</label>
+                        <button class="w-full flex items-center justify-between px-3 py-2.5 bg-[#f5f5f7] hover:bg-[#e8e8ed] transition-colors rounded-apple-sm text-[14px] font-medium border border-[#d2d2d7]/50 text-apple-dark">
+                            <span>Oct 24, 2023</span>
+                            <span class="material-symbols-outlined text-[18px] text-secondary">calendar_month</span>
+                        </button>
+                    </div>
+                    <div class="flex-1">
+                        <label class="text-[11px] font-bold uppercase text-secondary mb-1.5 block">Time</label>
+                        <button class="w-full flex items-center justify-between px-3 py-2.5 bg-[#f5f5f7] hover:bg-[#e8e8ed] transition-colors rounded-apple-sm text-[14px] font-medium border border-[#d2d2d7]/50 text-apple-dark">
+                            <span>10:30 AM</span>
+                            <span class="material-symbols-outlined text-[18px] text-secondary">schedule</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dynamic ETC Card -->
+                <div class="md:w-72 bg-apple-dark text-white p-5 md:p-6 flex flex-col justify-center shrink-0">
+                    <p class="text-[11px] font-bold uppercase text-white/50 mb-1 tracking-wider">Estimated Completion</p>
+                    <p class="apple-title text-[20px] md:text-[24px]">Tomorrow, 14:30</p>
+                    <p class="text-[12px] text-white/70 mt-1 md:mt-2">Ready for pickup at Riyadh Main</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- BottomNavBar (Footer) -->
+    <footer class="shrink-0 w-full h-[60px] md:h-[68px] glass-nav border-t border-[#d2d2d7]/40 flex justify-between items-center px-4 md:px-8 z-50">
+        <button class="flex items-center text-[#0066cc] font-medium transition-transform active:scale-[0.95] hover:opacity-80 p-2 -ml-2">
+            <span class="material-symbols-outlined mr-1 md:mr-2 text-[20px]">arrow_back_ios</span>
+            <span class="text-[15px] md:text-[16px]">Back</span>
+        </button>
+        <button class="bg-[#0071e3] text-white rounded-full md:rounded-xl px-6 md:px-8 py-2.5 md:py-3 font-medium flex items-center transition-all active:scale-[0.98] hover:bg-[#0059b5] shadow-sm">
+            <span class="text-[14px] md:text-[16px]">Confirm Booking</span>
+            <span class="material-symbols-outlined ml-2 text-[20px]" style='font-variation-settings: "FILL" 1;'>check_circle</span>
+        </button>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Radio Group Logic (Quality, Type, Level)
+            const radioGroups = document.querySelectorAll('.radio-group');
+            radioGroups.forEach(group => {
+                const buttons = group.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Reset all to unselected
+                        buttons.forEach(b => {
+                            b.className = 'py-3 rounded-apple-md bg-white border border-[#d2d2d7] text-secondary font-medium text-[14px] transition-all hover:bg-gray-50';
+                        });
+                        // Set clicked to selected
+                        btn.className = 'py-3 rounded-apple-md bg-white border-2 border-apple-blue text-apple-dark font-semibold text-[14px] transition-all shadow-sm';
+                    });
+                });
+            });
+
+            // 2. Selectable Cards Logic (Packages, Coverages)
+            const cardGroups = document.querySelectorAll('.card-group');
+            cardGroups.forEach(group => {
+                const cards = group.querySelectorAll('.selectable-card');
+                cards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        cards.forEach(c => {
+                            c.classList.remove('border-2', 'border-apple-blue', 'bg-blue-50/30');
+                            c.classList.add('border', 'border-[#d2d2d7]', 'bg-white');
+                        });
+                        card.classList.remove('border', 'border-[#d2d2d7]', 'bg-white');
+                        card.classList.add('border-2', 'border-apple-blue', 'bg-blue-50/30');
+                    });
+                });
+            });
+
+            // 3. Toggle Switches Logic
+            const switches = document.querySelectorAll('.toggle-switch');
+            switches.forEach(sw => {
+                sw.addEventListener('click', () => {
+                    const dot = sw.querySelector('div');
+                    const isActive = sw.classList.contains('bg-apple-blue');
+                    
+                    if (isActive) {
+                        // Turn Off
+                        sw.classList.replace('bg-apple-blue', 'bg-[#d2d2d7]');
+                        dot.classList.remove('right-0.5');
+                        dot.classList.add('left-0.5');
+                    } else {
+                        // Turn On
+                        sw.classList.replace('bg-[#d2d2d7]', 'bg-apple-blue');
+                        dot.classList.remove('left-0.5');
+                        dot.classList.add('right-0.5');
+                    }
+                });
+            });
+
+            // 4. Custom Checkboxes Logic
+            const checkboxes = document.querySelectorAll('.custom-checkbox');
+            checkboxes.forEach(label => {
+                label.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent double triggering
+                    const box = label.querySelector('.box');
+                    const icon = label.querySelector('.material-symbols-outlined');
+                    const isChecked = box.classList.contains('bg-apple-blue');
+
+                    if (isChecked) {
+                        // Uncheck
+                        box.classList.remove('bg-apple-blue', 'border-apple-blue');
+                        box.classList.add('bg-white', 'border-[#d2d2d7]');
+                        icon.classList.remove('opacity-100');
+                        icon.classList.add('opacity-0');
+                    } else {
+                        // Check
+                        box.classList.remove('bg-white', 'border-[#d2d2d7]');
+                        box.classList.add('bg-apple-blue', 'border-apple-blue');
+                        icon.classList.remove('opacity-0');
+                        icon.classList.add('opacity-100');
+                    }
+                });
+            });
+
+            // 5. Selectable Single Button (Standard Polish)
+            const selectableBtns = document.querySelectorAll('.selectable-btn');
+            selectableBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const icon = btn.querySelector('.material-symbols-outlined');
+                    const isSelected = btn.classList.contains('border-apple-blue');
+                    
+                    if (isSelected) {
+                        btn.classList.remove('border-2', 'border-apple-blue', 'bg-blue-50/30');
+                        btn.classList.add('border', 'border-[#d2d2d7]', 'bg-white');
+                        icon.style.opacity = '0.3';
+                        icon.style.color = '#86868b';
+                    } else {
+                        btn.classList.remove('border', 'border-[#d2d2d7]', 'bg-white');
+                        btn.classList.add('border-2', 'border-apple-blue', 'bg-blue-50/30');
+                        icon.style.opacity = '1';
+                        icon.style.color = '#0071e3';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
